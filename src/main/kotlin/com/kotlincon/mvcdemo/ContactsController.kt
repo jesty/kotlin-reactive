@@ -25,9 +25,9 @@ class ContactsController(val contactRepository: ContactRepository) {
 
     @PostMapping("/batch")
     @Transactional
-    fun createContact(@RequestBody contact: Array<Contact>) = contact.mapIndexed { i, contact ->
-        if (i >= 2) throw RuntimeException("Upgrade now to a PREMIUM ACCOUNT to create more than 2 contact in batch mode!")
-        contactRepository.save(contact)
+    fun createContact(@RequestBody contact: Array<Contact>) = contact.map {
+        if (it.name.equals("davide", true)) throw RuntimeException("Upgrade now to a PREMIUM ACCOUNT to create more than 2 contact in batch mode!")
+        contactRepository.save(it)
     }
 
 
