@@ -1,5 +1,5 @@
 package com.kotlincon.mvcdemo
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.reactive.ReactiveCrudRepository
 
-interface ContactRepository : CrudRepository<Contact, Int>
+interface ContactRepository : ReactiveCrudRepository<Contact, Long>
