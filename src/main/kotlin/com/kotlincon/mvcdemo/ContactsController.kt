@@ -1,6 +1,8 @@
 package com.kotlincon.mvcdemo
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
@@ -41,11 +43,14 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
     @PostMapping
     suspend fun createContact(@RequestBody contact: Contact): Contact = contactRepository.save(contact)
 
+
     @PostMapping("/batch")
-    suspend fun createContact(@RequestBody contact: List<Contact>): List<Contact>? = operator.executeAndAwait {
-        contact.map {
-            if (it.name.equals("davide", true)) throw RuntimeException("Update to PREMIUM ACCOUNT to save a contact with name \"Davide\"!")
-            contactRepository.save(it)
+    suspend fun createContacts(@RequestBody contact: Flow<Contact>): Flow<Contact>? = operator.executeAndAwait {
+        flow {
+            contact.collect {
+                if (it.name.equals("davide", true)) throw RuntimeException("Update to PREMIUM ACCOUNT to save a contact with name \"Davide\"!")
+                emit(contactRepository.save(it))
+            }
         }
     }
 
