@@ -1,48 +1,52 @@
 package com.kotlincon.mvcdemo
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.runBlocking
+import org.springframework.boot.context.event.ApplicationReadyEvent
+import org.springframework.context.event.EventListener
 import org.springframework.data.r2dbc.core.DatabaseClient
-import org.springframework.transaction.annotation.Transactional
+import org.springframework.data.r2dbc.core.await
+import org.springframework.transaction.reactive.TransactionalOperator
+import org.springframework.transaction.reactive.executeAndAwait
 import org.springframework.web.bind.annotation.*
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/contacts")
-class ContactsController(val contactRepository: ContactRepository, db: DatabaseClient) {
+class ContactsController(private val contactRepository: ContactRepositoryFlow,
+                         private val db: DatabaseClient,
+                         private val operator: TransactionalOperator) {
 
-    init {
+    @EventListener(ApplicationReadyEvent::class)
+    fun init() = runBlocking {
         println("Init database...")
-        db.execute("drop table if exists contact").then()
-                .then(db.execute("CREATE TABLE contact (\n" //
-                        + "    id          SERIAL PRIMARY KEY,\n" //
-                        + "    name        varchar(255) NULL,\n" //
-                        + "    surname     varchar(255)  NULL\n" //
-                        + ");")
-                        .then())
-                .then(contactRepository.save(Contact(name = "Davide", surname = "Cerbo")).then())
-                .then(contactRepository.save(Contact(name = "Valentina", surname = "Perazzo")).then())
-                .then(contactRepository.save(Contact(name = "Tizio", surname = "Caio")).then())
-                .doOnSuccess { println("Database initialized!") }
-                .subscribe()
+        db.execute("drop table if exists contact").await()
+        db.execute("CREATE TABLE contact (\n" //
+                + "    id          SERIAL PRIMARY KEY,\n" //
+                + "    name        varchar(255) NULL,\n" //
+                + "    surname     varchar(255)  NULL\n" //
+                + ");")
+                .await()
+        contactRepository.save(Contact(name = "Davide", surname = "Cerbo"))
+        contactRepository.save(Contact(name = "Valentina", surname = "Perazzo"))
+        contactRepository.save(Contact(name = "Tizio", surname = "Caio"))
+        println("Database initialized!")
     }
 
     @GetMapping
-    fun findAll(): Flux<Contact> = contactRepository.findAll()
+    fun findAll(): Flow<Contact> = contactRepository.findAll()
 
     @GetMapping("/{id}")
-    fun findById(id: Long): Mono<Contact> = contactRepository.findById(id)
+    suspend fun findById(id: Long): Contact? = contactRepository.findById(id)
 
     @PostMapping
-    fun createContact(@RequestBody contact: Contact): Mono<Contact> = contactRepository.save(contact)
+    suspend fun createContact(@RequestBody contact: Contact): Contact = contactRepository.save(contact)
 
     @PostMapping("/batch")
-    @Transactional
-    fun createContact(@RequestBody contact: Flux<Contact>): Flux<Contact> {
-        return contact
-                .flatMap {
-                    if (it.name.equals("davide", true)) throw RuntimeException("Update to PREMIUM ACCOUNT to save a contact with name \"Davide\"!")
-                    contactRepository.save(it)
-                }
+    suspend fun createContact(@RequestBody contact: List<Contact>): List<Contact>? = operator.executeAndAwait {
+        contact.map {
+            if (it.name.equals("davide", true)) throw RuntimeException("Update to PREMIUM ACCOUNT to save a contact with name \"Davide\"!")
+            contactRepository.save(it)
+        }
     }
 
 
