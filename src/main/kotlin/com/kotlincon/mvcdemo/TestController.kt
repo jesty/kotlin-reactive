@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping
-class TicController {
+class TestController {
 
     @GetMapping("/tic")
     suspend fun tic(): Flow<Int> = flow {
