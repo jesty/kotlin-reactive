@@ -35,7 +35,7 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
     }
 
     @GetMapping
-    fun findAll(): Flow<Contact> = contactRepository.findAll()
+    suspend fun findAll(): Flow<Contact> = contactRepository.findAll()
 
     @GetMapping("/{id}")
     suspend fun findById(id: Long): Contact? = contactRepository.findById(id)

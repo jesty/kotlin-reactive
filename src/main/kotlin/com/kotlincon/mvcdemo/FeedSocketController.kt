@@ -1,5 +1,6 @@
 package com.kotlincon.mvcdemo
 
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
@@ -9,12 +10,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.messaging.handler.annotation.MessageMapping
+import org.springframework.stereotype.Controller
 
-@RestController
-@RequestMapping("/feed")
+@Controller
 class FeedSocketController {
 
     //val channel = Channel<Int>(Channel.CONFLATED)
@@ -32,7 +31,8 @@ class FeedSocketController {
         channel.close()
     }
 
-    @GetMapping
+    @FlowPreview
+    @MessageMapping("feed")
     suspend fun getRunningFlow(): Flow<Int> = flow {
         channel.consumeEach {
             emit(it)
