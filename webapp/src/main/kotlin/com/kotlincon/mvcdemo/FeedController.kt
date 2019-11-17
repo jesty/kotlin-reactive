@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
-@RequestMapping("/feed")
+//@RestController
+//@RequestMapping("/feed")
 class FeedController {
 
     //val channel = Channel<Int>(Channel.CONFLATED)
@@ -24,16 +24,18 @@ class FeedController {
     @InternalCoroutinesApi
     @EventListener(ApplicationReadyEvent::class)
     fun init() = runBlocking {
-        println("Staring feed...")
+        println("Staring feed on web...")
         (1..Int.MAX_VALUE).forEach {
             delay(1000)
             channel.send(it)
+            println("Sending on web: $it")
         }
         channel.close()
     }
 
     @GetMapping
     suspend fun getRunningFlow(): Flow<Int> = flow {
+        println("Starting consuming on web...")
         channel.consumeEach {
             emit(it)
         }

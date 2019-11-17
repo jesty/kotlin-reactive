@@ -2,12 +2,11 @@ package com.kotlincon.mvcdemo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import javax.annotation.PostConstruct
 
 @SpringBootApplication
-class MvcDemoApplication
+class WebApplication
 
 fun main(args: Array<String>) {
-    runApplication<MvcDemoApplication>(*args)
+    runApplication<WebApplication>(*args)
 }
 

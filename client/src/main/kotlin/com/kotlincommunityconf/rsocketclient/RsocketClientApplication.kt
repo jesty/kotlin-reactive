@@ -9,3 +9,4 @@ class RsocketClientApplication
 fun main(args: Array<String>) {
 	runApplication<RsocketClientApplication>(*args)
 }
+

@@ -1,7 +1,6 @@
 package com.kotlincon.mvcdemo
 
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
@@ -20,13 +19,13 @@ class FeedSocketController {
     //val channel = BroadcastChannel<Int>()
     val channel = ConflatedBroadcastChannel<Int>()
 
-    @InternalCoroutinesApi
     @EventListener(ApplicationReadyEvent::class)
     fun init() = runBlocking {
-        println("Staring feed...")
+        println("Staring feed on RSocket...")
         (1..Int.MAX_VALUE).forEach {
             delay(1000)
             channel.send(it)
+            println("Sending on RSocket: $it")
         }
         channel.close()
     }
@@ -34,6 +33,7 @@ class FeedSocketController {
     @FlowPreview
     @MessageMapping("feed")
     suspend fun getRunningFlow(): Flow<Int> = flow {
+        println("Starting consuming on RSocket...")
         channel.consumeEach {
             emit(it)
         }
