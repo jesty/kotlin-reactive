@@ -1,8 +1,7 @@
 package com.kotlincommunityconf.rsocketclient
 
-import org.springframework.data.annotation.Id
 
-data class Contact(@Id var id: Int? = null,
+data class Contact(val id: Int,
                    val name: String,
                    val surname: String
 )
