@@ -6,7 +6,6 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
@@ -14,29 +13,18 @@ import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.stereotype.Controller
 
 @Controller
-class FeedSocketController {
+class ContactFeedController {
 
     //val channel = Channel<Int>(Channel.CONFLATED)
     //val channel = BroadcastChannel<Int>()
-    val channel = ConflatedBroadcastChannel<Int>()
+    val channel = ConflatedBroadcastChannel<Contact>()
 
-    @EventListener(ApplicationReadyEvent::class)
-    fun init() = runBlocking {
-        launch {
-            println("Staring feed on RSocket...")
-            (1..Int.MAX_VALUE).forEach {
-                delay(1000)
-                channel.send(it)
-                println("Sending on RSocket: $it")
-            }
-            channel.close()
-        }
-    }
+    suspend fun publish(contact: Contact) = channel.send(contact)
 
     @FlowPreview
-    @MessageMapping("feed")
-    suspend fun getRunningFlow(): Flow<Int> = flow {
-        println("Starting consuming on RSocket...")
+    @MessageMapping("contact-feed")
+    suspend fun getContacts(): Flow<Contact> = flow {
+        println("Starting consuming contacts on RSocket...")
         channel.consumeEach {
             emit(it)
         }

@@ -6,6 +6,7 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
@@ -24,13 +25,14 @@ class FeedController {
     @InternalCoroutinesApi
     @EventListener(ApplicationReadyEvent::class)
     fun init() = runBlocking {
-        println("Staring feed on web...")
-        (1..Int.MAX_VALUE).forEach {
-            delay(1000)
-            channel.send(it)
-            println("Sending on web: $it")
+        launch {
+            println("Staring feed on web...")
+            (1..Int.MAX_VALUE).forEach {
+                delay(1000)
+                channel.send(it)
+            }
+            channel.close()
         }
-        channel.close()
     }
 
     @GetMapping
