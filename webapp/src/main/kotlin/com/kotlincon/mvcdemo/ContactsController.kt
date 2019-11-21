@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/contacts")
 class ContactsController(private val contactRepository: ContactRepositoryFlow,
-                         private val contactFeedController: ContactFeedController,
                          private val db: DatabaseClient,
                          private val operator: TransactionalOperator) {
 
@@ -42,11 +41,7 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
     suspend fun findById(id: Long): Contact? = contactRepository.findById(id)
 
     @PostMapping
-    suspend fun createContact(@RequestBody contact: Contact): Contact {
-        val saved = contactRepository.save(contact)
-        contactFeedController.publish(saved)
-        return saved
-    }
+    suspend fun createContact(@RequestBody contact: Contact): Contact = contactRepository.save(contact)
 
 
     @PostMapping("/batch")
