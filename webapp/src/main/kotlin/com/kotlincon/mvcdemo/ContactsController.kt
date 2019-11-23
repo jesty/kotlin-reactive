@@ -8,7 +8,9 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/contacts")
-class ContactsController(val contactRepository: ContactRepository, db: DatabaseClient) {
+class ContactsController(private val contactRepository: ContactRepository,
+                         private val db: DatabaseClient,
+                         private val secretService: TopSecretService) {
 
     init {
         println("Init database...")
@@ -33,7 +35,10 @@ class ContactsController(val contactRepository: ContactRepository, db: DatabaseC
     fun findById(id: Long): Mono<Contact> = contactRepository.findById(id)
 
     @PostMapping
-    fun createContact(@RequestBody contact: Contact): Mono<Contact> = contactRepository.save(contact)
+    fun createContact(@RequestBody contact: Contact): Mono<Contact> {
+        secretService.doSecretThings(contact)
+        return contactRepository.save(contact)
+    }
 
     @PostMapping("/batch")
     @Transactional
