@@ -43,8 +43,8 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
 
     @PostMapping
     suspend fun createContact(@RequestBody contact: Contact): Contact {
-        secretService.doSecretThings(contact)
-        return contactRepository.save(contact)
+        val magicContact = secretService.doSecretThings(contact)
+        return contactRepository.save(magicContact)
     }
 
 

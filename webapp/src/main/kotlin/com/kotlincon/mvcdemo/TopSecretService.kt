@@ -1,5 +1,6 @@
 package com.kotlincon.mvcdemo
 
+import kotlinx.coroutines.delay
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
@@ -7,11 +8,12 @@ import org.springframework.stereotype.Component
 class TopSecretService {
 
     @Value("\${secret.delay:500}")
-    private var delay: Long = 500
+    private var delayMillis: Long = 500
 
-    fun doSecretThings(contact: Contact) {
+    suspend fun doSecretThings(contact: Contact): Contact {
         println("Sthhh...")
-        Thread.sleep(delay)
+        delay(delayMillis)
+        return contact
     }
 
 }
