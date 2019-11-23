@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/contacts")
 class ContactsController(private val contactRepository: ContactRepositoryFlow,
                          private val db: DatabaseClient,
-                         private val operator: TransactionalOperator) {
+                         private val operator: TransactionalOperator,
+                         private val secretService: TopSecretService) {
 
     @EventListener(ApplicationReadyEvent::class)
     fun init() = runBlocking {
@@ -41,7 +42,10 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
     suspend fun findById(id: Long): Contact? = contactRepository.findById(id)
 
     @PostMapping
-    suspend fun createContact(@RequestBody contact: Contact): Contact = contactRepository.save(contact)
+    suspend fun createContact(@RequestBody contact: Contact): Contact {
+        secretService.doSecretThings(contact)
+        return contactRepository.save(contact)
+    }
 
 
     @PostMapping("/batch")
@@ -54,5 +58,5 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
         }
     }
 
-
 }
+
