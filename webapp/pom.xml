@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.kotlincon</groupId>
-    <artifactId>mvcdemo</artifactId>
+    <artifactId>webapp-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mvcdemo</name>
+    <name>webapp</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
