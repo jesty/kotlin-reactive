@@ -1,0 +1,12 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1574533671340,0,Classes,,10636.0,,,true,,0,0,0,0,null,0,0,0
+1574533672344,0,Classes,,10636.0,,,true,,0,0,0,0,null,0,0,0
+1574533673372,0,Classes,,10637.0,,,true,,0,0,0,0,null,0,0,0
+1574533674378,0,Classes,,10639.0,,,true,,0,0,0,0,null,0,0,0
+1574533675386,0,Classes,,10645.0,,,true,,0,0,0,0,null,0,0,0
+1574533676392,0,Classes,,10645.0,,,true,,0,0,0,0,null,0,0,0
+1574533677396,0,Classes,,10645.0,,,true,,0,0,0,0,null,0,0,0
+1574533678397,0,Classes,,10645.0,,,true,,0,0,0,0,null,0,0,0
+1574533679399,0,Classes,,10645.0,,,true,,0,0,0,0,null,0,0,0
+1574533680400,0,Classes,,10645.0,,,true,,0,0,0,0,null,0,0,0
+1574533681404,0,Classes,,10645.0,,,true,,0,0,0,0,null,0,0,0

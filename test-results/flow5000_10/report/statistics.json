@@ -1,0 +1,47 @@
+{
+  "Report image generation" : {
+    "transaction" : "Report image generation",
+    "sampleCount" : 1,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 361.0,
+    "minResTime" : 361.0,
+    "maxResTime" : 361.0,
+    "pct1ResTime" : 361.0,
+    "pct2ResTime" : 361.0,
+    "pct3ResTime" : 361.0,
+    "throughput" : 2.770083102493075,
+    "receivedKBytesPerSec" : 0.0,
+    "sentKBytesPerSec" : 0.0
+  },
+  "Simple request" : {
+    "transaction" : "Simple request",
+    "sampleCount" : 5000,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 513.1985999999998,
+    "minResTime" : 501.0,
+    "maxResTime" : 715.0,
+    "pct1ResTime" : 537.0,
+    "pct2ResTime" : 558.0,
+    "pct3ResTime" : 625.0,
+    "throughput" : 485.9558752065313,
+    "receivedKBytesPerSec" : 55.04968898823987,
+    "sentKBytesPerSec" : 118.64157109534455
+  },
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 5001,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 513.1681663667265,
+    "minResTime" : 361.0,
+    "maxResTime" : 715.0,
+    "pct1ResTime" : 537.0,
+    "pct2ResTime" : 558.0,
+    "pct3ResTime" : 625.0,
+    "throughput" : 469.48929778445364,
+    "receivedKBytesPerSec" : 53.173699774690206,
+    "sentKBytesPerSec" : 114.59849089372888
+  }
+}

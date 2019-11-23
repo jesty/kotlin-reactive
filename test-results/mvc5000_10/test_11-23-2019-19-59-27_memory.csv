@@ -1,0 +1,14 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1574535567589,0,Memory,,2.4431872E8,,,true,,0,0,0,0,null,0,0,0
+1574535568597,0,Memory,,1.8870272E8,,,true,,0,0,0,0,null,0,0,0
+1574535569630,0,Memory,,2.10722816E8,,,true,,0,0,0,0,null,0,0,0
+1574535570641,0,Memory,,2.33791488E8,,,true,,0,0,0,0,null,0,0,0
+1574535571649,0,Memory,,2.0307968E8,,,true,,0,0,0,0,null,0,0,0
+1574535572653,0,Memory,,2.25099768E8,,,true,,0,0,0,0,null,0,0,0
+1574535573660,0,Memory,,2.49217016E8,,,true,,0,0,0,0,null,0,0,0
+1574535574664,0,Memory,,2.25051648E8,,,true,,0,0,0,0,null,0,0,0
+1574535575668,0,Memory,,2.49168896E8,,,true,,0,0,0,0,null,0,0,0
+1574535576675,0,Memory,,2.3109632E8,,,true,,0,0,0,0,null,0,0,0
+1574535577676,0,Memory,,2.53116416E8,,,true,,0,0,0,0,null,0,0,0
+1574535578680,0,Memory,,2.35423872E8,,,true,,0,0,0,0,null,0,0,0
+1574535579683,0,Memory,,2.56395392E8,,,true,,0,0,0,0,null,0,0,0
