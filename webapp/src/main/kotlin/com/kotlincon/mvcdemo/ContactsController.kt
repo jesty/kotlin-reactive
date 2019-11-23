@@ -23,8 +23,8 @@ class ContactsController(private val contactRepository: ContactRepository,
 
     @PostMapping
     fun createContact(@RequestBody contact: Contact): Contact {
-        topSecretService.doSecretThings(contact)
-        return contactRepository.save(contact)
+        val magicContact = topSecretService.doSecretThings(contact)
+        return contactRepository.save(magicContact)
     }
 
 

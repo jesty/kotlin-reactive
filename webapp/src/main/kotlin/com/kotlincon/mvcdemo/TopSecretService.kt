@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component
 class TopSecretService {
 
     @Value("\${secret.delay:500}")
-    private var delay: Long = 500
+    private var delayMillis: Long = 500
 
-    fun doSecretThings(contact: Contact) {
+    fun doSecretThings(contact: Contact): Contact {
         println("Sthhh...")
-        Thread.sleep(delay)
+        Thread.sleep(delayMillis)
+        return contact.copy(name = "${contact.surname}...")
     }
 
 }
