@@ -6,7 +6,8 @@ import javax.transaction.Transactional
 
 @RestController
 @RequestMapping("/contacts")
-class ContactsController(val contactRepository: ContactRepository) {
+class ContactsController(private val contactRepository: ContactRepository,
+                         private val topSecretService: TopSecretService) {
 
     init {
         contactRepository.save(Contact(name = "Davide", surname = "Cerbo"))
@@ -21,7 +22,11 @@ class ContactsController(val contactRepository: ContactRepository) {
     fun findById(id: Int): Optional<Contact> = contactRepository.findById(id)
 
     @PostMapping
-    fun createContact(@RequestBody contact: Contact) = contactRepository.save(contact)
+    fun createContact(@RequestBody contact: Contact): Contact {
+        topSecretService.doSecretThings(contact)
+        return contactRepository.save(contact)
+    }
+
 
     @PostMapping("/batch")
     @Transactional
@@ -29,6 +34,5 @@ class ContactsController(val contactRepository: ContactRepository) {
         if (it.name.equals("davide", true)) throw RuntimeException("Upgrade now to a PREMIUM ACCOUNT to create more than 2 contact in batch mode!")
         contactRepository.save(it)
     }
-
 
 }
