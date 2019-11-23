@@ -13,7 +13,7 @@ class TopSecretService {
     suspend fun doSecretThings(contact: Contact): Contact {
         println("Sthhh...")
         delay(delayMillis)
-        return contact
+        return contact.copy(name = "${contact.surname}...")
     }
 
 }
