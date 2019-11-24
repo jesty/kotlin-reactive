@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component
 @Component
 class PostgresConfig {
 
+    /**
+     * Pool configuration is ignored, to avoid this issue I manually provide the pool configurations
+     */
     @Bean
     fun connectionFactoryBuilder(properties: R2dbcProperties): ConnectionFactory? = ConnectionFactories
             .get(builder()
