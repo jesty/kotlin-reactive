@@ -35,10 +35,11 @@ class ContactsController(private val contactRepository: ContactRepository,
     fun findById(id: Long): Mono<Contact> = contactRepository.findById(id)
 
     @PostMapping
-    fun createContact(@RequestBody contact: Contact): Mono<Contact> {
-        secretService.doSecretThings(contact)
-        return contactRepository.save(contact)
-    }
+    fun createContact(@RequestBody contact: Contact): Mono<Contact> = secretService
+            .doSecretThings(contact)
+            .flatMap {
+                contactRepository.save(it)
+            }
 
     @PostMapping("/batch")
     @Transactional
