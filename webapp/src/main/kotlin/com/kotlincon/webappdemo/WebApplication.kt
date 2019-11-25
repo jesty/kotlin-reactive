@@ -1,4 +1,4 @@
-package com.kotlincon.mvcdemo
+package com.kotlincon.webappdemo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

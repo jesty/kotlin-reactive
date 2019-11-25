@@ -1,9 +1,8 @@
-package com.kotlincon.mvcdemo
+package com.kotlincon.webappdemo
 
 import kotlinx.coroutines.flow.Flow
 import org.springframework.data.r2dbc.core.*
 import org.springframework.stereotype.Component
-import javax.print.attribute.IntegerSyntax
 
 @Component
 class ContactRepositoryFlow(val databaseClient: DatabaseClient) {

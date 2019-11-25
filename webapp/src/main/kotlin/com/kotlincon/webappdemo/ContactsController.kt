@@ -1,5 +1,6 @@
-package com.kotlincon.mvcdemo
+package com.kotlincon.webappdemo
 
+import com.kotlincon.webappdemo.rsocket.ContactFeedController
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow

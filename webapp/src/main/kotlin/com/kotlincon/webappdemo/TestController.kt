@@ -1,4 +1,4 @@
-package com.kotlincon.mvcdemo
+package com.kotlincon.webappdemo
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

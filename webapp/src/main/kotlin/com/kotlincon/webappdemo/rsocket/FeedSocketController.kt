@@ -1,17 +1,14 @@
-package com.kotlincon.mvcdemo
+package com.kotlincon.webappdemo.rsocket
 
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
-import org.springframework.boot.context.event.ApplicationReadyEvent
-import org.springframework.context.event.EventListener
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.stereotype.Controller
+import javax.annotation.PostConstruct
 
 @Controller
 class FeedSocketController {
@@ -20,13 +17,13 @@ class FeedSocketController {
     val channel = BroadcastChannel<Int>(Channel.BUFFERED)
     //val channel = ConflatedBroadcastChannel<Int>()
 
-    @EventListener(ApplicationReadyEvent::class)
-    fun init() = runBlocking {
+    @InternalCoroutinesApi
+    @PostConstruct
+    fun init() = GlobalScope.launch {
         println("Staring feed on RSocket...")
         (1..Int.MAX_VALUE).forEach {
             delay(1000)
             channel.send(it)
-            println("Sending on RSocket: $it")
         }
         channel.close()
     }
