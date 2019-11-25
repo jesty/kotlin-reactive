@@ -2,13 +2,13 @@ package com.kotlincon.webappdemo
 
 import com.kotlincon.webappdemo.rsocket.ContactFeedController
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.r2dbc.core.await
+import org.springframework.http.ResponseEntity
 import org.springframework.transaction.reactive.TransactionalOperator
 import org.springframework.transaction.reactive.executeAndAwait
 import org.springframework.web.bind.annotation.*
@@ -40,7 +40,7 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
     suspend fun findAll(): Flow<Contact> = contactRepository.findAll()
 
     @GetMapping("/{id}")
-    suspend fun findById(id: Long): Contact? = contactRepository.findById(id)
+    suspend fun findById(@PathVariable("id") id: Long) = contactRepository.findById(id) ?.let { ResponseEntity.ok(it) }
 
     @PostMapping
     suspend fun createContact(@RequestBody contact: Contact): Contact {
@@ -51,13 +51,11 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
 
 
     @PostMapping("/batch")
-    suspend fun createContacts(@RequestBody contact: Flow<Contact>): Flow<Contact>? = operator.executeAndAwait {
-        flow {
-            contact.collect {
-                if (it.name.equals("davide", true)) throw RuntimeException("Update to PREMIUM ACCOUNT to save a contact with name \"Davide\"!")
-                emit(contactRepository.save(it))
-            }
-        }
+    suspend fun createContacts(@RequestBody contact: List<Contact>): Flow<Contact>? = operator.executeAndAwait {
+        contact.map {
+            if (it.name.equals("davide", true)) throw RuntimeException("Update to PREMIUM ACCOUNT to save a contact with name \"Davide\"!")
+            contactRepository.save(it)
+        }.asFlow()
     }
 
 
