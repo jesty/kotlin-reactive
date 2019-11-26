@@ -2,6 +2,8 @@ package com.kotlincon.webappdemo.rsocket
 
 import com.kotlincon.webappdemo.Contact
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.Flow
@@ -12,9 +14,9 @@ import org.springframework.stereotype.Controller
 @Controller
 class ContactFeedController {
 
-    //val channel = Channel<Int>(Channel.CONFLATED)
-    //val channel = BroadcastChannel<Int>()
-    val channel = ConflatedBroadcastChannel<Contact>()
+    //val channel = Channel<Contact>(Channel.CONFLATED)
+    val channel = BroadcastChannel<Contact>(Channel.BUFFERED)
+    //val channel = ConflatedBroadcastChannel<Contact>()
 
     suspend fun publish(contact: Contact) = channel.send(contact)
 
