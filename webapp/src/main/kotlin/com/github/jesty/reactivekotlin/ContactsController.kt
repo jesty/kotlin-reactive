@@ -40,7 +40,7 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
     suspend fun findAll(): Flow<Contact> = contactRepository.findAll()
 
     @GetMapping("/{id}")
-    suspend fun findById(@PathVariable("id") id: Long) = contactRepository.findById(id) ?.let { ResponseEntity.ok(it) }
+    suspend fun findById(@PathVariable("id") id: Long) = contactRepository.findById(id)
 
     @PostMapping
     suspend fun createContact(@RequestBody contact: Contact): Contact {
