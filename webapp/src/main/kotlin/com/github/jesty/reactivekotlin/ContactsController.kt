@@ -7,7 +7,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.r2dbc.core.await
-import org.springframework.http.ResponseEntity
 import org.springframework.transaction.reactive.TransactionalOperator
 import org.springframework.transaction.reactive.executeAndAwait
 import org.springframework.web.bind.annotation.*
@@ -39,7 +38,7 @@ class ContactsController(private val contactRepository: ContactRepositoryFlow,
     suspend fun findAll(): Flow<Contact> = contactRepository.findAll()
 
     @GetMapping("/{id}")
-    suspend fun findById(@PathVariable("id") id: Long) = contactRepository.findById(id) ?.let { ResponseEntity.ok(it) }
+    suspend fun findById(@PathVariable("id") id: Long) = contactRepository.findById(id)
 
     @PostMapping
     suspend fun createContact(@RequestBody contact: Contact): Contact {
