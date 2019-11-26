@@ -1,4 +1,4 @@
-package com.kotlincommunityconf.rsocketclient
+package com.github.jesty.reactivekotlin.rsocketclient
 
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach

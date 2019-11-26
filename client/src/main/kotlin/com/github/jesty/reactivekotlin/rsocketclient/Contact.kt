@@ -1,4 +1,4 @@
-package com.kotlincommunityconf.rsocketclient
+package com.github.jesty.reactivekotlin.rsocketclient
 
 
 data class Contact(val id: Int,

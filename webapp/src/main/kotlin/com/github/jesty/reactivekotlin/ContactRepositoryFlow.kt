@@ -1,4 +1,4 @@
-package com.kotlincon.webappdemo
+package com.github.jesty.reactivekotlin
 
 import kotlinx.coroutines.flow.Flow
 import org.springframework.data.r2dbc.core.*

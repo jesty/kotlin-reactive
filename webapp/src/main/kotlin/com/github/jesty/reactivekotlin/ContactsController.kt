@@ -1,6 +1,6 @@
-package com.kotlincon.webappdemo
+package com.github.jesty.reactivekotlin
 
-import com.kotlincon.webappdemo.rsocket.ContactFeedController
+import com.github.jesty.reactivekotlin.rsocket.ContactFeedController
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.runBlocking

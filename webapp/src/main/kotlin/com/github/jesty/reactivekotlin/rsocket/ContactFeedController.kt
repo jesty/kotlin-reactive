@@ -1,6 +1,6 @@
-package com.kotlincon.webappdemo.rsocket
+package com.github.jesty.reactivekotlin.rsocket
 
-import com.kotlincon.webappdemo.Contact
+import com.github.jesty.reactivekotlin.Contact
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel

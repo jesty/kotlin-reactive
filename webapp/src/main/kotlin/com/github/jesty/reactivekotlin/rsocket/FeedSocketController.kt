@@ -1,4 +1,4 @@
-package com.kotlincon.webappdemo.rsocket
+package com.github.jesty.reactivekotlin.rsocket
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BroadcastChannel

@@ -1,12 +1,12 @@
-package com.kotlincon.webappdemo
+package com.github.jesty.reactivekotlin.rsocketclient
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class WebApplication
+class RsocketClientApplication
 
 fun main(args: Array<String>) {
-    runApplication<WebApplication>(*args)
+	runApplication<RsocketClientApplication>(*args)
 }
 

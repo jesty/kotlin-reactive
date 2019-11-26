@@ -1,4 +1,4 @@
-package com.kotlincon.webappdemo
+package com.github.jesty.reactivekotlin
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
