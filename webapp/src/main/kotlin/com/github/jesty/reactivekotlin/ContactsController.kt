@@ -1,4 +1,4 @@
-package com.kotlincon.mvcdemo
+package com.github.jesty.reactivekotlin
 
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.transaction.annotation.Transactional
