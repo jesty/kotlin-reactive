@@ -9,7 +9,6 @@ The repository has 5 branches:
 * springwebflux: the first reactive version using Spring WebFlux and Project Reactor. 
 * flow: the last reactive version using Coroutines.
 * flowrsocket: RSocket support
-* flowrefactoring: the last example written better ;)
 
 
 To run one of the provided sample applications please move to playground folder and run:
@@ -24,6 +23,10 @@ In order to execute the performance tests, please open playground folder and run
 	$ test.sh reportFolderName
 
 Remember to set JMETER_HOME environment variable before running tests.
+
+To test the SSE execute a command like:
+
+    $ curl "Accept:text/event-stream" https://localhost:8080/feed
 
 
 
