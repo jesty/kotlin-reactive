@@ -1,4 +1,4 @@
-package com.kotlincon.mvcdemo
+package com.github.jesty.reactivekotlin
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow

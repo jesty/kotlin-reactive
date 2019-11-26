@@ -1,4 +1,4 @@
-package com.kotlincon.mvcdemo
+package com.github.jesty.reactivekotlin
 
 import kotlinx.coroutines.delay
 import org.springframework.beans.factory.annotation.Value
