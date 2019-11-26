@@ -8,8 +8,8 @@
 		<version>2.2.2.BUILD-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.kotlincon</groupId>
-	<artifactId>mvc-demo</artifactId>
+	<groupId>com.github.jesty</groupId>
+	<artifactId>reactivekotlin-webapp-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>webapp-demo</name>
 	<description>Demo project for Spring Boot</description>

@@ -1,4 +1,4 @@
-package com.kotlincon.mvcdemo
+package com.github.jesty.reactivekotlin
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

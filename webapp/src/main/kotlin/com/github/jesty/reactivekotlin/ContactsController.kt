@@ -1,4 +1,4 @@
-package com.kotlincon.mvcdemo
+package com.github.jesty.reactivekotlin
 
 import org.springframework.web.bind.annotation.*
 import java.util.*
