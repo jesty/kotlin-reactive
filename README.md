@@ -26,7 +26,7 @@ Remember to set JMETER_HOME environment variable before running tests.
 
 To test the SSE execute a command like:
 
-    $ curl "Accept:text/event-stream" https://localhost:8080/feed
+    $ curl -H "Accept:text/event-stream" http://localhost:8080/tic
 
 
 
